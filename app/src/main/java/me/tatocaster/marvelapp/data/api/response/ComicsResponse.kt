@@ -1,7 +1,7 @@
 package me.tatocaster.marvelapp.data.api.response
 
 
-data class HeroesResponse(
+data class ComicsResponse(
     val attributionHTML: String,
     val attributionText: String,
     val code: Int,

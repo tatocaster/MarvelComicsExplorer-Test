@@ -1,4 +1,4 @@
-package me.tatocaster.marvelapp.features.heroes.presentation.layout
+package me.tatocaster.marvelapp.features.comics.presentation.layout
 
 import android.graphics.Typeface
 import com.facebook.litho.Column
@@ -15,12 +15,12 @@ import me.tatocaster.marvelapp.R
 import me.tatocaster.marvelapp.data.api.response.Result
 
 @LayoutSpec
-class HeroItemFullScreenSpec {
+class ComicItemFullScreenSpec {
     companion object {
 
         @JvmStatic
         @OnCreateLayout
-        fun onCreateLayout(context: ComponentContext, @Prop hero: Result): ComponentLayout =
+        fun onCreateLayout(context: ComponentContext, @Prop comic: Result): ComponentLayout =
                 Column.create(context)
                         .backgroundColor(context.resources.getColor(R.color.ghostWhite))
                         .paddingDip(YogaEdge.TOP, 8f)
@@ -29,11 +29,22 @@ class HeroItemFullScreenSpec {
                                 Row.create(context)
                                         .child(
                                                 Text.create(context)
-                                                        .text(hero.name)
+                                                        .text(comic.title)
                                                         .textSizeSp(20f)
                                                         .textStyle(Typeface.BOLD)
                                                         .textColorRes(R.color.colorPrimary)
-                                                        .marginDip(YogaEdge.LEFT, 8f)
+                                                        .build())
+                                        .paddingDip(YogaEdge.LEFT, 8f)
+                                        .paddingDip(YogaEdge.RIGHT, 8f)
+                                        .build()
+                        )
+                        .child(
+                                Row.create(context)
+                                        .child(
+                                                Text.create(context)
+                                                        .text(comic.series.name)
+                                                        .textSizeSp(14f)
+                                                        .textColorRes(R.color.textColor)
                                                         .build())
                                         .paddingDip(YogaEdge.LEFT, 8f)
                                         .paddingDip(YogaEdge.RIGHT, 8f)
@@ -41,7 +52,7 @@ class HeroItemFullScreenSpec {
                         )
                         .child(
                                 GlideImage.create(context)
-                                        .imageUrl(hero.thumbnail.getFullUrl())
+                                        .imageUrl(comic.thumbnail.getFullUrl())
                                         .placeholderImageRes(R.drawable.ic_launcher_background)
                                         .centerCrop(true)
                                         .marginDip(YogaEdge.TOP, 8f)
@@ -54,7 +65,7 @@ class HeroItemFullScreenSpec {
                                 Row.create(context)
                                         .child(
                                                 Text.create(context)
-                                                        .text(hero.description)
+                                                        .text(comic.description)
                                                         .textSizeSp(14f)
                                                         .textColorRes(R.color.colorAccent)
                                                         .build())

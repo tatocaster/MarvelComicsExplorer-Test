@@ -1,4 +1,4 @@
-package me.tatocaster.marvelapp.features.heroes.presentation
+package me.tatocaster.marvelapp.features.comics.presentation
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -10,18 +10,18 @@ import com.facebook.litho.widget.RecyclerBinder
 import com.facebook.litho.widget.VerticalScroll
 import me.tatocaster.marvelapp.App
 import me.tatocaster.marvelapp.AppComponent
-import me.tatocaster.marvelapp.data.api.response.HeroesResponse
-import me.tatocaster.marvelapp.features.heroes.presentation.layout.HeroItem
-import me.tatocaster.marvelapp.features.heroes.presentation.layout.HeroItemFullScreen
-import me.tatocaster.marvelapp.features.heroes.presentation.layout.HerosLayout
+import me.tatocaster.marvelapp.data.api.response.ComicsResponse
+import me.tatocaster.marvelapp.features.comics.presentation.layout.ComicItem
+import me.tatocaster.marvelapp.features.comics.presentation.layout.ComicItemFullScreen
+import me.tatocaster.marvelapp.features.comics.presentation.layout.ComicLayout
 import javax.inject.Inject
 
-class HeroesActivity : AppCompatActivity(), HeroesContract.View {
+class ComicsActivity : AppCompatActivity(), ComicsContract.View {
 
     @Inject
-    lateinit var presenter: HeroesContract.Presenter
+    lateinit var presenter: ComicsContract.Presenter
 
-    private lateinit var scopeGraph: HeroesComponent
+    private lateinit var scopeGraph: ComicsComponent
     private lateinit var mComponentContext: ComponentContext
     private lateinit var mRecyclerBinder: RecyclerBinder
     private var mSingleView: Boolean = true
@@ -33,7 +33,7 @@ class HeroesActivity : AppCompatActivity(), HeroesContract.View {
         initViews()
         mRootView = LithoView.create(
                 this,
-                HerosLayout.create(mComponentContext)
+                ComicLayout.create(mComponentContext)
                         .binder(mRecyclerBinder)
                         .build()
         )
@@ -47,16 +47,16 @@ class HeroesActivity : AppCompatActivity(), HeroesContract.View {
         mRecyclerBinder = RecyclerBinder.Builder().build(mComponentContext)
     }
 
-    override fun onLoadHeroesList(heros: HeroesResponse) {
-        for ((index, value) in heros.data.results.withIndex()) {
-            mRecyclerBinder.insertItemAt(index, HeroItem.create(mComponentContext)
-                    .hero(value)
+    override fun onLoadComicsList(comics: ComicsResponse) {
+        for ((index, value) in comics.data.results.withIndex()) {
+            mRecyclerBinder.insertItemAt(index, ComicItem.create(mComponentContext)
+                    .comic(value)
                     .listener {
                         mRootView.setComponentAsync(
                                 VerticalScroll.create(mComponentContext).childComponent(
-                                        HeroItemFullScreen
+                                        ComicItemFullScreen
                                                 .create(mComponentContext)
-                                                .hero(value)
+                                                .comic(value)
                                 )
                                         .build())
                         mSingleView = true
@@ -84,14 +84,14 @@ class HeroesActivity : AppCompatActivity(), HeroesContract.View {
     }
 
     private fun setupScopeGraph(appComponent: AppComponent) {
-        scopeGraph = DaggerHeroesComponent.builder()
+        scopeGraph = DaggerComicsComponent.builder()
                 .appComponent(appComponent)
-                .heroesModule(HeroesModule(this))
+                .comicsModule(ComicsModule(this))
                 .build()
         scopeGraph.inject(this)
     }
 
     companion object {
-        private val TAG = "HeroesActivity"
+        private val TAG = "ComicsActivity"
     }
 }

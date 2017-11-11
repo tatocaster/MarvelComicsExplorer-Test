@@ -1,4 +1,4 @@
-package me.tatocaster.marvelapp.features.heroes.presentation.layout
+package me.tatocaster.marvelapp.features.comics.presentation.layout
 
 import android.graphics.Color
 import com.facebook.litho.Column
@@ -11,7 +11,7 @@ import com.facebook.litho.widget.Recycler
 import com.facebook.litho.widget.RecyclerBinder
 
 @LayoutSpec
-class HerosLayoutSpec {
+class ComicLayoutSpec {
     companion object {
 
         @JvmStatic

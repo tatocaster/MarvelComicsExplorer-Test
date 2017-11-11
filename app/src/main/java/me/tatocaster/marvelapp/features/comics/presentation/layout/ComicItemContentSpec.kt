@@ -1,4 +1,4 @@
-package me.tatocaster.marvelapp.features.heroes.presentation.layout
+package me.tatocaster.marvelapp.features.comics.presentation.layout
 
 import android.graphics.Typeface
 import android.text.TextUtils
@@ -16,12 +16,12 @@ import me.tatocaster.marvelapp.R
 import me.tatocaster.marvelapp.data.api.response.Result
 
 @LayoutSpec
-class HeroItemContentSpec {
+class ComicItemContentSpec {
     companion object {
 
         @JvmStatic
         @OnCreateLayout
-        fun onCreateLayout(context: ComponentContext, @Prop hero: Result): ComponentLayout = Column.create(context)
+        fun onCreateLayout(context: ComponentContext, @Prop comic: Result): ComponentLayout = Column.create(context)
                 .backgroundColor(context.resources.getColor(R.color.ghostWhite))
                 .paddingDip(YogaEdge.TOP, 8f)
                 .paddingDip(YogaEdge.BOTTOM, 8f)
@@ -29,7 +29,7 @@ class HeroItemContentSpec {
                         Row.create(context)
                                 .child(
                                         Text.create(context)
-                                                .text(hero.name)
+                                                .text(comic.title)
                                                 .textSizeSp(20f)
                                                 .textStyle(Typeface.BOLD)
                                                 .textColorRes(R.color.colorPrimary)
@@ -42,7 +42,7 @@ class HeroItemContentSpec {
                         Row.create(context)
                                 .child(
                                         Text.create(context)
-                                                .text(hero.modified)
+                                                .text(comic.series.name)
                                                 .textSizeSp(14f)
                                                 .textColorRes(R.color.textColor)
                                                 .build())
@@ -54,7 +54,7 @@ class HeroItemContentSpec {
                         Row.create(context)
                                 .child(
                                         Text.create(context)
-                                                .text(hero.description)
+                                                .text(comic.description)
                                                 .ellipsize(TextUtils.TruncateAt.END)
                                                 .maxLines(1)
                                                 .textSizeSp(14f)
@@ -66,7 +66,7 @@ class HeroItemContentSpec {
                 )
                 .child(
                         GlideImage.create(context)
-                                .imageUrl(hero.thumbnail.getFullUrl())
+                                .imageUrl(comic.thumbnail.getFullUrl())
                                 .placeholderImageRes(R.drawable.ic_launcher_background)
                                 .centerCrop(true)
                                 .marginDip(YogaEdge.TOP, 8f)

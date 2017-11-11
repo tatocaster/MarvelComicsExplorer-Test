@@ -1,10 +1,10 @@
 package me.tatocaster.marvelapp.data.api
 
 import io.reactivex.Flowable
-import me.tatocaster.marvelapp.data.api.response.HeroesResponse
+import me.tatocaster.marvelapp.data.api.response.ComicsResponse
 import retrofit2.http.GET
 
 interface ApiService {
-    @GET("v1/public/characters")
-    fun getHeros(): Flowable<HeroesResponse>
+    @GET("v1/public/characters/1009220/comics")
+    fun getHeros(): Flowable<ComicsResponse>
 }

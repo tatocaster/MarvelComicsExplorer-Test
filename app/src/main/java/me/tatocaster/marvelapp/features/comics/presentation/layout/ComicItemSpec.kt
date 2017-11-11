@@ -1,4 +1,4 @@
-package me.tatocaster.marvelapp.features.heroes.presentation.layout
+package me.tatocaster.marvelapp.features.comics.presentation.layout
 
 import android.view.View
 import com.facebook.litho.ClickEvent
@@ -11,20 +11,20 @@ import com.facebook.yoga.YogaEdge
 import me.tatocaster.marvelapp.data.api.response.Result
 
 @LayoutSpec
-class HeroItemSpec {
+class ComicItemSpec {
     companion object {
         @JvmStatic
         @OnCreateLayout
-        fun onCreateLayout(context: ComponentContext, @Prop hero: Result): ComponentLayout =
+        fun onCreateLayout(context: ComponentContext, @Prop comic: Result): ComponentLayout =
                 Column.create(context)
                         .child(
                                 Card.create(context)
-                                        .content(HeroItemContent.create(context)
-                                                .hero(hero)
+                                        .content(ComicItemContent.create(context)
+                                                .comic(comic)
                                         )
                                         .marginDip(YogaEdge.BOTTOM, 4f)
                                         .marginDip(YogaEdge.TOP, 4f)
-                                        .clickHandler(HeroItem.onClick(context))
+                                        .clickHandler(ComicItem.onClick(context))
 
                         ).build()
 
