@@ -3,4 +3,14 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="ghostWhite">#F7F7F9</color>
+    <color name="grey">#9EA2A4</color>
+
+    <color name="easy">#1FA462</color>
+    <color name="hard">#c18a7b</color>
+
+    <color name="cardBackground">#64615F</color>
+
+    <color name="textColor">#393E59</color>
 </resources>
