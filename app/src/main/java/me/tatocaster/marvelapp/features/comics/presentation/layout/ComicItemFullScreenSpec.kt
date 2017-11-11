@@ -13,6 +13,7 @@ import com.facebook.yoga.YogaEdge
 import com.github.pavlospt.litho.glide.GlideImage
 import me.tatocaster.marvelapp.R
 import me.tatocaster.marvelapp.data.api.response.Result
+import java.util.*
 
 @LayoutSpec
 class ComicItemFullScreenSpec {
@@ -52,7 +53,13 @@ class ComicItemFullScreenSpec {
                         )
                         .child(
                                 GlideImage.create(context)
-                                        .imageUrl(comic.thumbnail.getFullUrl())
+                                        .imageUrl(
+                                                if (comic.images.isNotEmpty()) {
+                                                    comic.images.get(Random().nextInt(comic.images.size)).getFullUrl()
+                                                } else {
+                                                    comic.thumbnail.getFullUrl()
+                                                }
+                                        )
                                         .placeholderImageRes(R.drawable.ic_launcher_background)
                                         .centerCrop(true)
                                         .marginDip(YogaEdge.TOP, 8f)
@@ -71,6 +78,50 @@ class ComicItemFullScreenSpec {
                                                         .build())
                                         .paddingDip(YogaEdge.LEFT, 8f)
                                         .paddingDip(YogaEdge.RIGHT, 8f)
+                                        .build()
+                        )
+                        .child(
+                                Row.create(context)
+                                        .child(
+                                                Column.create(context)
+                                                        .child(
+
+                                                                Text.create(context)
+                                                                        .text("Price")
+                                                                        .textColorRes(R.color.grey)
+                                                                        .textSizeSp(14f)
+                                                                        .build()
+                                                        )
+                                                        .child(
+                                                                Text.create(context)
+                                                                        .text(comic.prices[0].price.toString())
+                                                                        .textSizeSp(16f)
+                                                                        .build()
+                                                        )
+                                                        .widthPercent(50f)
+                                                        .build()
+                                        )
+                                        .child(
+                                                Column.create(context)
+                                                        .child(
+
+                                                                Text.create(context)
+                                                                        .text("Format")
+                                                                        .textColorRes(R.color.grey)
+                                                                        .textSizeSp(14f)
+                                                                        .build()
+                                                        )
+                                                        .child(
+                                                                Text.create(context)
+                                                                        .text(comic.format)
+                                                                        .textColorRes(R.color.textColor)
+                                                                        .textSizeSp(16f)
+                                                                        .build())
+                                                        .marginDip(YogaEdge.LEFT, 8f)
+                                                        .widthPercent(50f)
+                                                        .build()
+                                        )
+                                        .paddingDip(YogaEdge.ALL, 8f)
                                         .build()
                         )
                         .build()

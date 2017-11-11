@@ -15,7 +15,7 @@ data class Result(
 
         val format: String,
         val id: Int,
-        val images: List<Any>,
+        val images: List<Thumbnail>,
         val isbn: String,
         val issn: String,
         val issueNumber: Int,
