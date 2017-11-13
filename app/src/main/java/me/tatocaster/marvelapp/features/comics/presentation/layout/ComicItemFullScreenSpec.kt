@@ -94,7 +94,7 @@ class ComicItemFullScreenSpec {
                                                         )
                                                         .child(
                                                                 Text.create(context)
-                                                                        .text(comic.prices[0].price.toString())
+                                                                        .text("$${comic.prices[0].price}")
                                                                         .textSizeSp(16f)
                                                                         .build()
                                                         )
